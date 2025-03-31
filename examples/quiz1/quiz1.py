@@ -75,6 +75,9 @@ def wrong_schedule(p):
 
     # Replace with AVX instructinos
     avx_instrs = [vector_assign_two, vector_multiply, vector_load, vector_store]
+    # Set the memory types to be AVX2 vectors
+    for name in ["two", "out", "inp"]:
+        p = set_memory(p, f"{name}_vec", AVX2)
     p = replace_all(p, avx_instrs)
 
     return p
